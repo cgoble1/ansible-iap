@@ -1,9 +1,24 @@
 ---
 - name: Demo playbook
-  hosts: all
+  hosts: bastion
   gather_facts: false
   tasks:
-    - name: Display all variables/facts known for a host
-      debug:
-        var: hostvars[inventory_hostname]
-      tags: debug_info
+    - name: Check Corelight version
+      command: sudo corelightctl sensor status 
+      register: results
+    - debug:  msg="{{ results.stdout | regex_search('OSVersion.*') }}"
+    
+    - name: Install package manager
+      shell: curl -s https://packagecloud.io/install/repositories/corelight/corelightctl/script.deb.sh | sudo bash
+    
+    - name: Install the latest version
+      command: sudo apt-get install corelight-sensor=27.12.0-1 -y
+    
+    - name: Deploy the sensor
+      command: sudo corelightctl sensor deploy -v
+
+    - name: Check Corelight version
+      command: sudo corelightctl sensor status 
+      register: results2
+    - debug:  msg="{{ results2.stdout | regex_search('OSVersion.*') }}"
+
