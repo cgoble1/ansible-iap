@@ -12,10 +12,10 @@
       shell: curl -s https://packagecloud.io/install/repositories/corelight/corelightctl/script.deb.sh | sudo bash
     
     - name: Install the latest version
-      command: sudo apt-get install corelight-sensor=27.12.0-1 -y
+      command: sudo apt-get install corelight-sensor=27.13.0-1 -y
     
     - name: Deploy the sensor
-      command: sudo corelightctl sensor deploy -v
+      command: 3
 
     - name: Check Corelight version
       command: sudo corelightctl sensor status 

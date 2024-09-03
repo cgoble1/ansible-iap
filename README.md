@@ -2,4 +2,8 @@
 This an example on how to use Google Cloud IAP with Ansible for conf management
 A detailed article is to explain how it [works is here](https://medium.com/p/7c92e7ebf4da)
 
+To run script:
+ansible-playbook -i inventory.gcp.yml playbooks/demo.yml 
+
+
 
